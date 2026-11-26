@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CloudBoard</title>
+  <meta name="description" content="Copy on one device, paste on another. Your personal cloud clipboard." />
+  <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d0f17" media="(prefers-color-scheme: dark)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="CloudBoard" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-logo" viewBox="0 0 32 32"><path d="M9.5 25.5h13.25a6.25 6.25 0 0 0 .9-12.44A8.5 8.5 0 0 0 7.2 14.9 5.4 5.4 0 0 0 9.5 25.5Z" fill="currentColor" opacity=".18"/><path d="M9.5 25.5h13.25a6.25 6.25 0 0 0 .9-12.44A8.5 8.5 0 0 0 7.2 14.9 5.4 5.4 0 0 0 9.5 25.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="12.5" y="14" width="7" height="8.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14.4 14v-.6c0-.5.4-.9.9-.9h1.4c.5 0 .9.4.9.9v.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5.5c0-.8.7-1.5 1.5-1.5h1c.8 0 1.5.7 1.5 1.5V7m3 0-.7 11a2 2 0 0 1-2 1.9H9.7a2 2 0 0 1-2-1.9L7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M5 12h12m-5-5.5L17.5 12 12 17.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-paste" viewBox="0 0 24 24"><path d="M9 5H7.5A2.5 2.5 0 0 0 5 7.5v10A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-10A2.5 2.5 0 0 0 16.5 5H15" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="9" y="3.5" width="6" height="3.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6m-2.5-2.5L12 16.5l2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6.5 16.5V11a5.5 5.5 0 1 1 11 0v5.5l1.5 1.5H5l1.5-1.5ZM10 20a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 17.5h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24"><rect x="4.5" y="3" width="15" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 17.5h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="10" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 18.5h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M10 4.5a2 2 0 1 1 4 0V6h3.5c.6 0 1 .4 1 1v3.5H17a2 2 0 1 0 0 4h1.5V18c0 .6-.4 1-1 1H14v-1.5a2 2 0 1 0-4 0V19H6.5c-.6 0-1-.4-1-1v-3.5H7a2 2 0 1 0 0-4H5.5V7c0-.6.4-1 1-1H10V4.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5.5 13.5H12L11 21l7.5-10.5H12L13 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m11 12 8-8m-3 3 2 2m-4 0 1.5 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.27c0-.78-.07-1.53-.2-2.27H12v4.3h5.9a5.05 5.05 0 0 1-2.2 3.3v2.75h3.55c2.08-1.92 3.25-4.74 3.25-8.08Z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.75c-.98.66-2.24 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.84 14.12a6.6 6.6 0 0 1 0-4.24V7.04H2.18a11 11 0 0 0 0 9.92l3.66-2.84Z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.96 10.96 0 0 0 12 1 11 11 0 0 0 2.18 7.04l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38Z"/></symbol>
+  </svg>
+
+  <!-- Loading -->
+  <div id="boot" class="boot"><svg class="boot-logo"><use href="#i-logo"/></svg></div>
+
+  <!-- Sign in -->
+  <section id="signin" class="signin" hidden>
+    <div class="signin-card">
+      <div class="brand brand-lg"><svg><use href="#i-logo"/></svg><span>CloudBoard</span></div>
+      <h1>Copy here.<br/><span class="grad">Paste anywhere.</span></h1>
+      <p class="lead">One clipboard for your phone, tablet and laptop. Press <kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>C</kbd> to send something to the cloud, and it pops up on every other device, ready to paste.</p>
+      <button id="signin-btn" class="btn btn-google"><svg><use href="#i-google"/></svg>Continue with Google</button>
+      <p class="fine">Your clips are private to your account. Only the last 50 are kept.</p>
+      <div class="signin-devices" aria-hidden="true">
+        <span><svg><use href="#i-laptop"/></svg>Windows &amp; Mac</span>
+        <span><svg><use href="#i-phone"/></svg>Android</span>
+        <span><svg><use href="#i-tablet"/></svg>iPhone &amp; iPad</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- App -->
+  <div id="app" class="app" hidden>
+    <header class="topbar">
+      <div class="brand"><svg><use href="#i-logo"/></svg><span>CloudBoard</span></div>
+      <nav class="tabs" role="tablist">
+        <button role="tab" data-tab="clips" aria-selected="true">Clips</button>
+        <button role="tab" data-tab="devices" aria-selected="false">Devices</button>
+      </nav>
+      <div class="account">
+        <button id="account-btn" class="avatar" aria-haspopup="menu" aria-label="Account"></button>
+        <div id="account-menu" class="menu" role="menu" hidden>
+          <div class="menu-head"><strong id="account-name"></strong><span id="account-email"></span></div>
+          <button id="signout-btn" role="menuitem">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="demo-banner" class="demo-banner" hidden>
+      <svg><use href="#i-bolt"/></svg><span><strong>Demo mode.</strong> Data stays in this tab. Add your Firebase config in <code>web/js/firebase-config.js</code> to go live.</span>
+    </div>
+
+    <main>
+      <!-- Clips view -->
+      <section id="view-clips" class="view">
+        <div id="notify-banner" class="banner" hidden>
+          <div class="banner-icon"><svg><use href="#i-bell"/></svg></div>
+          <div class="banner-text">
+            <strong>Get a popup when you copy elsewhere</strong>
+            <span id="notify-banner-sub">Turn on notifications for this device. Tap the notification to copy.</span>
+          </div>
+          <button id="notify-banner-btn" class="btn btn-primary btn-sm">Turn on</button>
+          <button id="notify-banner-close" class="icon-btn" aria-label="Dismiss"><svg><use href="#i-x"/></svg></button>
+        </div>
+
+        <div class="composer">
+          <textarea id="composer-input" rows="3" placeholder="Paste or type something to send to your devices…" aria-label="Clip text"></textarea>
+          <div class="composer-bar">
+            <span class="hint"><kbd>Ctrl</kbd><kbd>Enter</kbd> to send</span>
+            <div class="composer-actions">
+              <button id="paste-send-btn" class="btn btn-ghost"><svg><use href="#i-paste"/></svg><span>Send clipboard</span></button>
+              <button id="send-btn" class="btn btn-primary" disabled><span>Send</span><svg><use href="#i-send"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="list-head">
+          <h2>Recent <span id="clip-count" class="count"></span></h2>
+          <label class="search">
+            <svg><use href="#i-search"/></svg>
+            <input id="search-input" type="search" placeholder="Search" aria-label="Search clips" />
+          </label>
+        </div>
+
+        <ul id="clip-list" class="clip-list" aria-live="polite"></ul>
+        <div id="empty" class="empty" hidden>
+          <svg><use href="#i-logo"/></svg>
+          <h3>Nothing here yet</h3>
+          <p>Send your first clip above, or press <kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>C</kbd> on a computer with the extension.</p>
+        </div>
+      </section>
+
+      <!-- Devices view -->
+      <section id="view-devices" class="view" hidden>
+        <div class="card this-device">
+          <div class="card-head">
+            <div class="device-glyph"><svg id="this-device-icon"><use href="#i-laptop"/></svg></div>
+            <div class="grow">
+              <span class="eyebrow">This device</span>
+              <input id="device-name" class="inline-input" maxlength="40" aria-label="Device name" />
+            </div>
+          </div>
+          <div class="setting">
+            <div>
+              <strong>Popup notifications</strong>
+              <span id="notify-status" class="muted">Off</span>
+            </div>
+            <button id="notify-toggle" class="switch" role="switch" aria-checked="false" aria-label="Popup notifications"><span></span></button>
+          </div>
+          <p id="ios-install-hint" class="note" hidden>On iPhone and iPad, notifications only work after you add CloudBoard to your Home Screen: tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>, and open it from there.</p>
+        </div>
+
+        <h2 class="section-title">Your devices</h2>
+        <ul id="device-list" class="device-list"></ul>
+
+        <h2 class="section-title">Connect more</h2>
+        <div class="connect-grid">
+          <div class="card connect">
+            <div class="connect-icon"><svg><use href="#i-puzzle"/></svg></div>
+            <h3>Browser extension</h3>
+            <p>For Windows &amp; Mac. Adds <kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>C</kbd> to cloud-copy and <kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>V</kbd> to cloud-paste. Clips from your phone land straight on your clipboard.</p>
+            <button id="connect-ext-btn" class="btn btn-primary" hidden>Connect this browser</button>
+            <p id="ext-missing" class="muted small">Install the CloudBoard extension in Chrome or Edge, then reload this page.</p>
+            <p id="ext-connected" class="ok small" hidden><svg><use href="#i-check"/></svg>This browser is connected</p>
+          </div>
+
+          <div class="card connect">
+            <div class="connect-icon"><svg><use href="#i-bolt"/></svg></div>
+            <h3>iPhone &amp; iPad Shortcut</h3>
+            <p>Send your clipboard from Control Center or the Share sheet, and grab the latest clip with one tap.</p>
+            <button id="shortcut-btn" class="btn btn-ghost">Set up Shortcut</button>
+          </div>
+
+          <div class="card connect">
+            <div class="connect-icon"><svg><use href="#i-phone"/></svg></div>
+            <h3>Android</h3>
+            <p>Open this site in Chrome, tap <strong>Install app</strong>, then turn on notifications. Use <strong>Share → CloudBoard</strong> to send text from any app.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">Access keys</h2>
+        <p class="muted small keys-intro">Keys let the extension and Shortcuts reach your clips. Revoke one to disconnect that device right away.</p>
+        <ul id="key-list" class="key-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <!-- Copy sheet (shown when a notification is tapped but the browser needs a tap to copy) -->
+  <div id="copy-sheet" class="sheet-backdrop" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="copy-sheet-title">
+      <span class="eyebrow" id="copy-sheet-from"></span>
+      <h3 id="copy-sheet-title">Tap to copy</h3>
+      <pre id="copy-sheet-text" class="sheet-text"></pre>
+      <button id="copy-sheet-btn" class="btn btn-primary btn-block"><svg><use href="#i-copy"/></svg>Copy to clipboard</button>
+      <button id="copy-sheet-close" class="btn btn-ghost btn-block">Close</button>
+    </div>
+  </div>
+
+  <!-- Shortcut setup dialog -->
+  <div id="shortcut-sheet" class="sheet-backdrop" hidden>
+    <div class="sheet sheet-wide" role="dialog" aria-modal="true" aria-labelledby="shortcut-title">
+      <button class="icon-btn sheet-x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+      <h3 id="shortcut-title">Set up the iOS Shortcut</h3>
+      <p class="muted">Copy this key now. It won't be shown again.</p>
+      <div class="secret"><code id="shortcut-token"></code><button id="shortcut-token-copy" class="btn btn-ghost btn-sm"><svg><use href="#i-copy"/></svg>Copy</button></div>
+      <ol class="steps">
+        <li><strong>Send to CloudBoard:</strong> in the Shortcuts app, create a shortcut with
+          <em>Get Clipboard</em> → <em>Get Contents of URL</em>:
+          <div class="kv"><span>URL</span><code id="shortcut-url-send"></code></div>
+          <div class="kv"><span>Method</span><code>POST</code></div>
+          <div class="kv"><span>Header</span><code>Authorization: Bearer &lt;your key&gt;</code></div>
+          <div class="kv"><span>Body</span><code>JSON · text = Clipboard · deviceName = iPad</code></div>
+          Turn on <em>Show in Share Sheet</em> and add it to Control Center.
+        </li>
+        <li><strong>Paste from CloudBoard:</strong> create a second shortcut with
+          <em>Get Contents of URL</em> (same header) → <em>Copy to Clipboard</em>:
+          <div class="kv"><span>URL</span><code id="shortcut-url-latest"></code></div>
+        </li>
+        <li>On iPhone, go to <strong>Settings → Accessibility → Touch → Back Tap</strong> and pick <em>Send to CloudBoard</em> for a double tap.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

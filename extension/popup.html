@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CloudBoard</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <div class="brand"><img src="icons/icon-32.png" alt="" width="22" height="22" /><span>CloudBoard</span></div>
+    <span id="status" class="status"></span>
+  </header>
+
+  <!-- Not connected -->
+  <section id="unlinked" hidden>
+    <div class="hero">
+      <h1>Connect this browser</h1>
+      <p>Sign in on the CloudBoard web app and click <strong>Connect this browser</strong> on the Devices tab.</p>
+      <button id="open-app" class="btn primary block">Open CloudBoard</button>
+    </div>
+  </section>
+
+  <!-- Connected -->
+  <section id="linked" hidden>
+    <div class="shortcuts">
+      <div class="sc"><span class="keys"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>C</kbd></span><span>Cloud-copy selection</span></div>
+      <div class="sc"><span class="keys"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>V</kbd></span><span>Cloud-paste latest</span></div>
+    </div>
+
+    <button id="send-clipboard" class="btn primary block">Send my clipboard</button>
+
+    <h2>Recent</h2>
+    <ul id="recent" class="recent"><li class="muted">Loading…</li></ul>
+
+    <div class="settings">
+      <label class="row"><span>Put incoming clips on my clipboard</span><input id="auto-copy" type="checkbox" /></label>
+      <label class="row"><span>Show notifications</span><input id="notify" type="checkbox" /></label>
+      <label class="row name"><span>Device name</span><input id="device-name" type="text" maxlength="40" /></label>
+    </div>
+
+    <footer>
+      <span id="account" class="muted"></span>
+      <div class="links">
+        <a href="#" id="open-app-2">Open app</a>
+        <a href="#" id="shortcuts">Shortcuts</a>
+        <a href="#" id="unlink" class="danger">Disconnect</a>
+      </div>
+    </footer>
+  </section>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

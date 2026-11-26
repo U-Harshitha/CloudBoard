@@ -1,0 +1,46 @@
+:root {
+  --bg: #ffffff; --surface: #f4f5fa; --border: #e4e6ef; --text: #141726; --muted: #7d8299;
+  --accent: #5b5bf0; --accent-2: #8b5cf6; --ok: #138a5b; --danger: #d43c4c;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #11131d; --surface: #1a1d2b; --border: #282c3e; --text: #eceef7; --muted: #8a8fa6; --accent: #7c7cff; --accent-2: #a78bfa; --ok: #3ccf91; --danger: #ff6b7a; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; width: 340px; background: var(--bg); color: var(--text); font: 13.5px/1.45 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.status { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.status.on::before { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 20%, transparent); }
+section { padding: 14px 16px 12px; }
+.hero { text-align: center; padding: 10px 4px 6px; }
+.hero h1 { font-size: 17px; margin: 0 0 6px; }
+.hero p { color: var(--muted); margin: 0 0 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+.btn.primary { border: 0; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.btn.block { width: 100%; }
+.btn:disabled { opacity: .5; }
+.shortcuts { display: grid; gap: 6px; margin-bottom: 12px; }
+.sc { display: flex; align-items: center; gap: 10px; color: var(--muted); }
+.keys { display: inline-flex; gap: 3px; min-width: 118px; }
+kbd { font: 500 11px ui-monospace, "SF Mono", Consolas, monospace; padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border); border-bottom-width: 2px; background: var(--surface); color: var(--text); }
+h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 16px 0 8px; font-weight: 600; }
+.recent { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow: auto; }
+.recent li.clip { padding: 8px 10px; border-radius: 10px; background: var(--surface); border: 1px solid transparent; cursor: pointer; }
+.recent li.clip:hover { border-color: var(--border); }
+.recent .t { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+.recent .m { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.muted { color: var(--muted); font-size: 12.5px; }
+.settings { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 8px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; cursor: pointer; }
+.row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--accent); }
+.row.name input { width: 150px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; }
+footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+footer .muted { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.links { display: flex; gap: 10px; flex: none; }
+a { color: var(--accent); text-decoration: none; font-size: 12.5px; font-weight: 500; }
+a.danger { color: var(--danger); }
+.toast { position: fixed; left: 12px; right: 12px; bottom: 12px; padding: 8px 12px; border-radius: 10px; background: var(--text); color: var(--bg); font-weight: 500; text-align: center; }
+.toast.err { background: var(--danger); color: #fff; }
