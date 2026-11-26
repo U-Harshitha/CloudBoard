@@ -1,4 +1,4 @@
-// Pure helpers shared by the Cloud Functions. No Firebase imports here so they
+// Pure helpers used by the API (server/handler.js). No Firebase imports, so they
 // can be unit-tested with plain `node --test`.
 const crypto = require("crypto");
 

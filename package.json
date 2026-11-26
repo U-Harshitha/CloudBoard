@@ -1,0 +1,16 @@
+{
+  "name": "cloudboard",
+  "private": true,
+  "description": "Personal cloud clipboard: copy on one device, paste on another.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node server/dev.js",
+    "emulators": "firebase emulators:start --project demo-cloudboard",
+    "test": "node --test server/test/*.test.js",
+    "vapid": "web-push generate-vapid-keys"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "web-push": "^3.6.7"
+  }
+}

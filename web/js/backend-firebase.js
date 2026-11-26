@@ -14,7 +14,6 @@ import {
   getFirestore,
   collection,
   doc,
-  addDoc,
   deleteDoc,
   getDoc,
   setDoc,
@@ -98,15 +97,9 @@ export const backend = {
     return onSnapshot(q, (snap) => cb(snap.docs.map(toClip)), onError);
   },
 
-  async addClip(text, device) {
-    await addDoc(collection(db, "users", uid(), "clips"), {
-      text,
-      deviceId: device.id,
-      deviceName: device.name,
-      deviceType: device.type,
-      createdAt: serverTimestamp(),
-    });
-  },
+  // Clips go through the API so it can push them to your other devices.
+  addClip: (text, device) =>
+    api("/clips", { method: "POST", body: { text, deviceId: device.id, deviceName: device.name, deviceType: device.type } }),
 
   deleteClip: (id) => deleteDoc(doc(db, "users", uid(), "clips", id)),
 

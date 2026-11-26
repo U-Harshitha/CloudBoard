@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "",
+  "outputDirectory": "web",
+  "functions": {
+    "api/index.js": { "maxDuration": 15 }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api?path=:path*" },
+    { "source": "/__/auth/:path*", "destination": "https://cloudboard-ffc48.firebaseapp.com/__/auth/:path*" },
+    { "source": "/__/firebase/:path*", "destination": "https://cloudboard-ffc48.firebaseapp.com/__/firebase/:path*" },
+    { "source": "/share", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+  ]
+}

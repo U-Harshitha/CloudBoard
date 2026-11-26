@@ -2,7 +2,7 @@ rules_version = '2';
 
 // CloudBoard security rules.
 // Every user can only ever see and modify their own data under /users/{uid}.
-// Link tokens (used by the browser extension and iOS Shortcut) are server-only.
+// Access keys (used by the browser extension and iOS Shortcut) are server-only.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -11,19 +11,16 @@ service cloud.firestore {
     }
 
     match /users/{uid}/clips/{clipId} {
+      // New clips are created by the API (server/handler.js) so it can send push notifications.
       allow read, delete: if signedInAs(uid);
-      allow create: if signedInAs(uid)
-        && request.resource.data.text is string
-        && request.resource.data.text.size() > 0
-        && request.resource.data.text.size() <= 50000;
-      allow update: if false;
+      allow create, update: if false;
     }
 
     match /users/{uid}/devices/{deviceId} {
       allow read, write: if signedInAs(uid);
     }
 
-    // linkTokens/* and everything else: Cloud Functions (Admin SDK) only.
+    // linkTokens/* and everything else: the API (Admin SDK) only.
     match /{document=**} {
       allow read, write: if false;
     }
